@@ -23,11 +23,11 @@ const { update } = require("./models/user");
 const sw = new Stopwatch(true);
 
 
-/*http.listen(process.env.PORT ||  3001, function() {
+http.listen(process.env.PORT ||  3001, function() {
   var host = http.address().address
   var port = http.address().port
   console.log('App listening at http://%s:%s', host, port)
-}); */
+});
 
 // Start Socket.io Server
 const server = http.createServer(app)
@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
   })
 })
 
-server.listen(3001, () => {
+server.listen(80, () => {
 })
 /* process.env.MONGOOSE_DB_LINK*/
 // Connect to MongoDB 
@@ -56,7 +56,7 @@ mongoose.connect( process.env.MONGOOSE_DB_LINK,
 ).then(() => console.log("Connected ffs"));
 
 // Backend Setup
-/* app.use(express.static(path.join(__dirname, './client/build')));*/
+app.use(express.static(path.join(__dirname, './client/build')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -426,10 +426,10 @@ const loopUpdate = async () => {
       phase_start_time = Date.now()
     }
   }
-  /*
+  
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
   });
-  */
+  
 
 }
