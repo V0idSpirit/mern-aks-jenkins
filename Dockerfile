@@ -8,7 +8,7 @@ RUN cd client && npm install && npm run build
 FROM node:16.15.0-alpine AS api-build
 WORKDIR /usr/src
 COPY backend/ ./api/
-RUN cd api && npm install && ENVIRONMENT=production npm run build
+RUN cd api && npm install && npm run build
 RUN ls
 
 # Stage3: Packagign the app
