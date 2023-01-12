@@ -1,21 +1,18 @@
 pipeline {
-  tools {
-        maven 'Maven3'
-    }
     agent any
         environment {
         //once you create ACR in Azure cloud, use that here
-        registryName = "miniprojacrrepo"
+        registryName = "webappdemominip"
         //- update your credentials ID after creating credentials for connecting to ACR
         registryCredential = 'ACR'
         dockerImage = ''
-        registryUrl = 'myacrrepo3210.azurecr.io'
+        registryUrl = 'webappdemominip.azurecr.io'
     }
     
     stages {
         stage('checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'check_out_from_your_repo_after_forking_my_repo']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/V0idSpirit/mern-aks-jenkins']]])
             }
         }
 
@@ -33,7 +30,7 @@ pipeline {
          steps{   
              script {
                 docker.withRegistry( "http://${registryUrl}", registryCredential ) {
-                dockerImage.push()
+                dockerImage.push() 
                 }
             }
           }
@@ -43,7 +40,7 @@ pipeline {
           steps {
             script {
                 withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
-                sh ('kubectl apply -f  jenkins-aks-deploy-from-acr.yaml')
+                sh ('kubectl apply -f  manifest.yaml')
                 }
             }
         }

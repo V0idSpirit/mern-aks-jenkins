@@ -18,12 +18,12 @@ spec:
         app: webapp
     spec:
       containers:
-      - image: miniprojectessat.azurecr.io/miniprojectessat/web-app:v1
+      - image: webappdemominip.azurecr.io/webappdemominip/web-app:v1
         name: webapp
         imagePullPolicy: Always
         resources: {}
         ports:
-          - containerPort: 80 
+          - containerPort: 80
 status: {}
 
 ---
