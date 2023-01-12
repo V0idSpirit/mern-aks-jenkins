@@ -28,7 +28,7 @@ pipeline {
             }
         }
         
-    // Uploading Docker images into ACR
+    // Uploading Docker images into ACRs
         stage('Upload Image to ACR') {
          steps{   
              script {
